@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 
 # Add Azure OpenAI package
+# Add Azure OpenAI package
+from openai import AzureOpenAI
 
 
 def main(): 
@@ -14,25 +16,31 @@ def main():
         azure_oai_key = os.getenv("AZURE_OAI_KEY")
         azure_oai_deployment = os.getenv("AZURE_OAI_DEPLOYMENT")
         
-        # Initialize the Azure OpenAI client...
+        # Read text from file
+        text = open(file="../text-files/sample-text.txt", encoding="utf8").read()
         
+        print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
+        
+        # Add code to build request...
+        # Initialize the Azure OpenAI client
+        client = AzureOpenAI(
+                azure_endpoint = azure_oai_endpoint, 
+                api_key=azure_oai_key,  
+                api_version="2023-12-01-preview"
+                )
 
-
-        while True:
-            # Get input text
-            input_text = input("Enter the prompt (or type 'quit' to exit): ")
-            if input_text.lower() == "quit":
-                break
-            if len(input_text) == 0:
-                print("Please enter a prompt.")
-                continue
-
-            print("\nSending request for summary to Azure OpenAI endpoint...\n\n")
+        # Send request to Azure OpenAI model
+        response = client.chat.completions.create(
+            model=azure_oai_deployment,
+            temperature=0.7,
+            max_tokens=120,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
+            ]
+        )
             
-            # Add code to send request...
-            
-            
-            
+        print("Summary: " + response.choices[0].message.content + "\n")
 
     except Exception as ex:
         print(ex)
