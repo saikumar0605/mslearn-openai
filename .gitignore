@@ -1,2 +1,8 @@
 bin
 obj
+.env
+env
+.gitignore
+gitignore
+mslearn
+./mslearn/
