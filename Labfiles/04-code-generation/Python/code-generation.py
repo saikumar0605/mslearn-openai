@@ -56,7 +56,19 @@ def call_openai_model(prompt, model, client):
     user_message = prompt
 
     # Format and send the request to the model
-
+ # Format and send the request to the model
+    messages =[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": user_message},
+    ]
+        
+    # Call the Azure OpenAI model
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=1000
+    )
 
     # Print the response to the console, if desired
     if printFullResponse:

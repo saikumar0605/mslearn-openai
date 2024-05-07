@@ -1,0 +1,19 @@
+Sure! Here are four unit tests for the given function:
+
+1. Test Case: num1 is positive and num2 is negative
+   `absolute_square(5, -3)`
+   Expected Output: 64
+
+2. Test Case: num1 is zero and num2 is positive
+   `absolute_square(0, 7)`
+   Expected Output: 49
+
+3. Test Case: num1 is negative and num2 is zero
+   `absolute_square(-9, 0)`
+   Expected Output: 81
+
+4. Test Case: num1 and num2 are both positive
+   `absolute_square(2, 4)`
+   Expected Output: 4
+
+These test cases cover different scenarios and edge cases to ensure the function works correctly.
